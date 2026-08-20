@@ -1,0 +1,16 @@
+model_list:
+  # --- local, free, no key (needs Ollama running on the host) ---
+  # - model_name: local-llama
+  #   litellm_params:
+  #     model: ollama/llama3.1
+  #     api_base: http://host.docker.internal:11434   # how a container reaches host Ollama on macOS
+
+  # --- Gemini free tier (needs GEMINI_API_KEY in .env) ---
+  - model_name: gemini-flash
+    litellm_params:
+      model: gemini/gemini-3.7-flash                # ⚠ confirm the current free flash model id (Q8)
+      api_key: os.environ/GEMINI_API_KEY
+
+litellm_settings:
+  drop_params: true          # tolerate provider-specific param differences
+  # success_callback: ["langfuse"]   # we'll turn this on later to log cost to Langfuse
