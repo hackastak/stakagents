@@ -10,6 +10,7 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.141.1",
     "langchain-core>=1.6.0",
+    "langchain-openai>=1.6.0",
     "langgraph>=1.2.11",
     "litellm>=1.97.0",
     "openinference-instrumentation-langchain>=0.1.70",
@@ -26,3 +27,7 @@ stakagents = "stakagents:main"
 [build-system]
 requires = ["uv_build>=0.8.15,<0.9.0"]
 build-backend = "uv_build"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
