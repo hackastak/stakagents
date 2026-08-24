@@ -1,0 +1,34 @@
+{
+  "agent": "readme-generator",
+  "cases": [
+    {
+      "id": "python-cli",
+      "input": {
+        "repo_path": "src/stakagents/evals/fixtures/py_cli"
+      },
+      "criteria": "A README for a small Python command-line tool named greet. It should describe it as a Python CLI, and include installation and usage sections. It must not claim the project is a web app or uses a database.",
+      "must_include": [
+        "Installation",
+        "Usage"
+      ],
+      "must_not_include": [
+        "PostgreSQL",
+        "Django"
+      ]
+    },
+    {
+      "id": "node-lib",
+      "input": {
+        "repo_path": "src/stakagents/evals/fixtures/node_lib"
+      },
+      "criteria": "A README for a small Node.js library published as an npm package (slugify-lite). It should mention npm install and how to import and use the library, with a usage section. It must not claim the project is written in Python.",
+      "must_include": [
+        "install",
+        "Usage"
+      ],
+      "must_not_include": [
+        "pip install"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "slugify-lite",
+  "version": "1.0.0",
+  "description": "Turn a string into a URL-safe slug.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "license": "MIT"
+}
