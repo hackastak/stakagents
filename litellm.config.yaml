@@ -1,16 +1,32 @@
 model_list:
-  # --- local, free, no key (needs Ollama running on the host) ---
+  # --- default: cheap + fast, free tier (the app's get_chat_model default) ---
+  - model_name: gemini-flash
+    litellm_params:
+      model: gemini/gemini-3.7-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # --- lighter/faster free model — good for high-volume, low-stakes work (eval judge) ---
+  - model_name: gemini-flash-lite
+    litellm_params:
+      model: gemini/gemini-3.7-flash-lite
+      api_key: os.environ/GEMINI_API_KEY
+
+  # --- PAID, quality-critical only. Uncomment + set ANTHROPIC_API_KEY to enable. ---
+  # - model_name: claude-sonnet
+  #   litellm_params:
+  #     model: anthropic/claude-sonnet-4-5   # confirm current id via the claude-api skill
+  #     api_key: os.environ/ANTHROPIC_API_KEY
+
+  # --- LOCAL, $0, unlimited. Uncomment once you `ollama pull llama3.1`. ---
   # - model_name: local-llama
   #   litellm_params:
   #     model: ollama/llama3.1
-  #     api_base: http://host.docker.internal:11434   # how a container reaches host Ollama on macOS
-
-  # --- Gemini free tier (needs GEMINI_API_KEY in .env) ---
-  - model_name: gemini-flash
-    litellm_params:
-      model: gemini/gemini-3.7-flash                # ⚠ confirm the current free flash model id (Q8)
-      api_key: os.environ/GEMINI_API_KEY
+  #     api_base: http://host.docker.internal:11434
 
 litellm_settings:
-  drop_params: true          # tolerate provider-specific param differences
-  # success_callback: ["langfuse"]   # we'll turn this on later to log cost to Langfuse
+  drop_params: true
+  # Budget enforcement needs LiteLLM DB mode (DATABASE_URL + virtual keys) — it's a
+  # no-op on the proxy without a DB (see startup warning). Defer until a PAID model
+  # is uncommented above; free-tier rate limits are the de-facto budget until then.
+  # max_budget: 5.0          # in-memory spend tripwire (USD) for THIS proxy process
+  # budget_duration: 30d     # reset window
