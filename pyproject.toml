@@ -19,6 +19,7 @@ dependencies = [
     "pydantic>=2.13.4",
     "pydantic-settings>=2.15.0",
     "uvicorn[standard]>=0.52.4",
+    "youtube-transcript-api>=1.2.4",
 ]
 
 [project.scripts]

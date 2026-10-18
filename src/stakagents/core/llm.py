@@ -2,11 +2,13 @@
 
 from langchain_openai import ChatOpenAI
 
+from pydantic import SecretStr
+
 from stakagents.core.config import settings
 
 # The LiteLLM proxy has no master key in local dev, but the OpenAI-compatible
 # client still requires a non-empty api_key, so we pass a harmless placeholder.
-_GATEWAY_API_KEY = "sk-noop"
+_GATEWAY_API_KEY = SecretStr("sk-noop")
 
 
 def get_chat_model(
